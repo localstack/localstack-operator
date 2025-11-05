@@ -1,0 +1,36 @@
+# This sample shows basic usage of using hooks with LocalStack on startup
+#
+# ## Requirements
+#
+# * Set up a secret with your auth token and the name `localstack-auth-token` with format `LOCALSTACK_AUTH_TOKEN=<token>`
+#
+# ```
+# kubectl create secret generic localstack-auth-token \
+#   --from-literal=LOCALSTACK_AUTH_TOKEN="$LOCALSTACK_AUTH_TOKEN"
+# ```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ready-localstack-hook
+data:
+  create-bucket.sh: |
+    #!/bin/bash
+    echo "Running ready hook"
+    echo "Setting up localstack"
+    awslocal s3 mb s3://mybucket
+---
+apiVersion: api.localstack.cloud/v1alpha1
+kind: LocalStack
+metadata:
+  name: localstack
+spec:
+  image: localstack/localstack-pro:latest
+  dnsProvider: coredns
+  dnsConfigName: coredns
+  dnsConfigNamespace: kube-system
+  envFrom:
+  - secretRef:
+      name: localstack-auth-token
+  hooks:
+    readyConfigName: ready-localstack-hook
+

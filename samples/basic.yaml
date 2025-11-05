@@ -1,0 +1,23 @@
+# This sample shows basic usage of LocalStack and the operator.
+#
+# ## Requirements
+#
+# * Set up a secret with your auth token and the name `localstack-auth-token` with format `LOCALSTACK_AUTH_TOKEN=<token>`
+#
+# ```
+# kubectl create secret generic localstack-auth-token \
+#   --from-literal=LOCALSTACK_AUTH_TOKEN="$LOCALSTACK_AUTH_TOKEN"
+# ```
+apiVersion: api.localstack.cloud/v1alpha1
+kind: LocalStack
+metadata:
+  name: localstack
+spec:
+  image: localstack/localstack-pro:latest
+  dnsProvider: coredns
+  dnsConfigName: coredns
+  dnsConfigNamespace: kube-system
+  envFrom:
+  - secretRef:
+      name: localstack-auth-token
+

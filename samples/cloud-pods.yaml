@@ -1,0 +1,26 @@
+# This sample shows basic usage of how to auto load cloud pods on startup
+#
+# ## Requirements
+#
+# * Set up a secret with your auth token and the name `localstack-auth-token` with format `LOCALSTACK_AUTH_TOKEN=<token>`
+#
+# ```
+# kubectl create secret generic localstack-auth-token \
+#   --from-literal=LOCALSTACK_AUTH_TOKEN="$LOCALSTACK_AUTH_TOKEN"
+# ```
+#
+# * Create a cloud pod containing previously deployed resources
+apiVersion: api.localstack.cloud/v1alpha1
+kind: LocalStack
+metadata:
+  name: localstack
+spec:
+  image: localstack/localstack-pro:latest
+  dnsProvider: coredns
+  dnsConfigName: coredns
+  dnsConfigNamespace: kube-system
+  # TODO: add the name of your cloud pods here
+  autoLoadPods: ["srw-single-bucket"]
+  envFrom:
+  - secretRef:
+      name: localstack-auth-token
