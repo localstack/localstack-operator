@@ -18,4 +18,4 @@ kubectl apply -f https://github.com/localstack/localstack-operator-public/releas
 
 ## CRD definition
 
-The operator includes a `LocalStack` CRD which defines your LocalStack instance. See the [./api-docs.md] for a description of the available fields.
+The operator includes a `LocalStack` CRD which defines your LocalStack instance. See the [api docs](https://github.com/localstack/localstack-operator-public/tree/main/api-docs.md) for a description of the available fields.
