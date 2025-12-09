@@ -111,9 +111,11 @@ _Appears in:_
 | `debug` _string_ |  | info | Enum: [trace trace-internal debug info warn error warning] <br />Optional: \{\} <br /> |
 | `autoLoadPods` _string array_ |  |  | Optional: \{\} <br /> |
 | `authToken` _string_ |  |  | MaxLength: 39 <br />MinLength: 39 <br />Optional: \{\} <br />Pattern: `^ls-[a-zA-Z0-9]\{8\}-[a-zA-Z0-9]\{4\}-[a-zA-Z0-9]\{4\}-[a-zA-Z0-9]\{4\}-[a-zA-Z0-9]\{12\}$` <br /> |
+| `pvcName` _string_ | Mount a PVC at /var/lib/localstack providing caching between LocalStack lifetimes |  | Optional: \{\} <br /> |
 | `hooks` _[Hooks](#hooks)_ |  |  | Optional: \{\} <br /> |
 | `licenseServerConfig` _[LicenseServerConfig](#licenseserverconfig)_ |  | \{ endpoint:https://api.localstack.cloud/v1 \} | Optional: \{\} <br /> |
 | `image` _string_ | Validate docker inage name (with optional tag and registry address) |  | Pattern: `(?:[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*\/)?(?:[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*\/)*[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*(:[a-zA-Z0-9_.-]+)?` <br />Required: \{\} <br /> |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#pullpolicy-v1-core)_ | PullPolicy describes a policy for if/when to pull a container image.<br />If providing an image tag of "latest", the default will be set to "Always", otherwise "IfNotPresent" |  | Enum: [Always IfNotPresent Never] <br />Optional: \{\} <br /> |
 | `resources` _[ResourceRequirements](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#resourcerequirements-v1-core)_ |  |  | Optional: \{\} <br /> |
 | `readiness_probe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#probe-v1-core)_ |  |  | Optional: \{\} <br /> |
 | `liveness_probe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#probe-v1-core)_ |  |  | Optional: \{\} <br /> |
@@ -121,6 +123,8 @@ _Appears in:_
 | `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#envvar-v1-core) array_ |  |  | Optional: \{\} <br /> |
 | `dnsPolicy` _[DNSPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#dnspolicy-v1-core)_ |  | ClusterFirst | Enum: [Default ClusterFirst ClusterFirstWithHostNet None] <br />Optional: \{\} <br /> |
 | `runAsUser` _integer_ |  | 0 | Enum: [0 1000] <br />Optional: \{\} <br /> |
+| `podSecurityContext` _[PodSecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#podsecuritycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
+| `containerSecurityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#securitycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
 
 
 #### LocalStackStatus
@@ -155,6 +159,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `image` _string_ | Validate docker inage name (with optional tag and registry address) |  | Pattern: `(?:[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*\/)?(?:[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*\/)*[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*(:[a-zA-Z0-9_.-]+)?` <br />Required: \{\} <br /> |
+| `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#pullpolicy-v1-core)_ | PullPolicy describes a policy for if/when to pull a container image.<br />If providing an image tag of "latest", the default will be set to "Always", otherwise "IfNotPresent" |  | Enum: [Always IfNotPresent Never] <br />Optional: \{\} <br /> |
 | `resources` _[ResourceRequirements](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#resourcerequirements-v1-core)_ |  |  | Optional: \{\} <br /> |
 | `readiness_probe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#probe-v1-core)_ |  |  | Optional: \{\} <br /> |
 | `liveness_probe` _[Probe](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#probe-v1-core)_ |  |  | Optional: \{\} <br /> |
@@ -162,5 +167,7 @@ _Appears in:_
 | `env` _[EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#envvar-v1-core) array_ |  |  | Optional: \{\} <br /> |
 | `dnsPolicy` _[DNSPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#dnspolicy-v1-core)_ |  | ClusterFirst | Enum: [Default ClusterFirst ClusterFirstWithHostNet None] <br />Optional: \{\} <br /> |
 | `runAsUser` _integer_ |  | 0 | Enum: [0 1000] <br />Optional: \{\} <br /> |
+| `podSecurityContext` _[PodSecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#podsecuritycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
+| `containerSecurityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#securitycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
 
 
