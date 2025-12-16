@@ -14,6 +14,40 @@ Package v1alpha1 contains API Schema definitions for the api v1alpha1 API group
 
 
 
+#### CaCertificate
+
+
+
+CaCertificate provides options for providing a custom CA certificate for outbound requests
+
+
+
+_Appears in:_
+- [LicenseServerConfig](#licenseserverconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `configMap` _[CaCertificateConfigMap](#cacertificateconfigmap)_ |  |  | Optional: \{\} <br /> |
+
+
+#### CaCertificateConfigMap
+
+
+
+
+
+
+
+_Appears in:_
+- [CaCertificate](#cacertificate)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ |  |  | Optional: \{\} <br /> |
+| `namespace` _string_ |  |  | Optional: \{\} <br /> |
+| `key` _string_ |  |  | Optional: \{\} <br /> |
+
+
 #### Hooks
 
 
@@ -48,6 +82,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `proxies` _object (keys:string, values:string)_ |  | \{  \} | Optional: \{\} <br /> |
 | `endpoint` _string_ |  | https://api.localstack.cloud/v1 | Required: \{\} <br /> |
+| `caCertificate` _[CaCertificate](#cacertificate)_ |  |  | Optional: \{\} <br /> |
 
 
 #### LocalStack
