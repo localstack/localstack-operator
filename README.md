@@ -13,7 +13,7 @@ You can use `kubectl` to install the LocalStack Operator into your cluster:
 kubectl apply -f https://github.com/localstack/localstack-operator/releases/latest/download/controller.yaml
 
 # or specific version, e.g. v0.4.1
-kubectl apply -f https://github.com/localstack/localstack-operator/releases/v0.4.1/download/controller.yaml
+kubectl apply -f https://github.com/localstack/localstack-operator/releases/download/v0.4.1/controller.yaml
 ```
 
 ## CRD definition
