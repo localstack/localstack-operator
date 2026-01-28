@@ -1481,7 +1481,7 @@ apiVersion: v1
 data:
   LOCALSTACK_TELEMETRY_ENABLED: "1"
   LOCALSTACK_TELEMETRY_ENVIRONMENT: production
-  LOCALSTACK_TELEMETRY_RELEASE: v0.4.1
+  LOCALSTACK_TELEMETRY_RELEASE: v0.4.2
   LOCALSTACK_TELEMETRY_USER_NAME: generic
 kind: ConfigMap
 metadata:
@@ -1573,7 +1573,7 @@ spec:
         envFrom:
         - configMapRef:
             name: localstack-operator-controller-manager-config
-        image: localstack/localstack-k8s-operator:v0.4.1
+        image: localstack/localstack-k8s-operator:v0.4.2
         livenessProbe:
           httpGet:
             path: /healthz

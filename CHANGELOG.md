@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.2] - 2026-01-28
+
+### Fixed
+
+* Fixed not setting the `searches` field of the `dnsConfig` for the LocalStack pod when running as a non-root user
+
 ## [0.4.1] - 2025-12-16
 
 ### Added
@@ -48,6 +54,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.2]: https://github.com/localstack/localstack-operator/compare/v0.4.1..v0.4.2
 [0.4.1]: https://github.com/localstack/localstack-operator/compare/v0.4.0..v0.4.1
 [0.4.0]: https://github.com/localstack/localstack-operator/compare/v0.3.3..v0.4.0
 [0.3.3]: https://github.com/localstack/localstack-operator/releases/tag/v0.3.3
