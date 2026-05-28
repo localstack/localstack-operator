@@ -148,6 +148,7 @@ _Appears in:_
 | `authToken` _string_ |  |  | MaxLength: 39 <br />MinLength: 39 <br />Optional: \{\} <br />Pattern: `^ls-[a-zA-Z0-9]\{8\}-[a-zA-Z0-9]\{4\}-[a-zA-Z0-9]\{4\}-[a-zA-Z0-9]\{4\}-[a-zA-Z0-9]\{12\}$` <br /> |
 | `pvcName` _string_ | Mount a PVC at /var/lib/localstack providing caching between LocalStack lifetimes |  | Optional: \{\} <br /> |
 | `hooks` _[Hooks](#hooks)_ |  |  | Optional: \{\} <br /> |
+| `podSchedulingConfig` _[PodSchedulingConfig](#podschedulingconfig)_ | Pod scheduling configuration for services spawned by LocalStack (e.g., Lambda, ECS tasks).<br />Allows configuring tolerations, nodeSelector, and affinity. |  | Optional: \{\} <br /> |
 | `licenseServerConfig` _[LicenseServerConfig](#licenseserverconfig)_ |  | \{ endpoint:https://api.localstack.cloud/v1 \} | Optional: \{\} <br /> |
 | `image` _string_ | Validate docker inage name (with optional tag and registry address) |  | Pattern: `(?:[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*\/)?(?:[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*\/)*[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*(:[a-zA-Z0-9_.-]+)?` <br />Required: \{\} <br /> |
 | `imagePullPolicy` _[PullPolicy](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#pullpolicy-v1-core)_ | PullPolicy describes a policy for if/when to pull a container image.<br />If providing an image tag of "latest", the default will be set to "Always", otherwise "IfNotPresent" |  | Enum: [Always IfNotPresent Never] <br />Optional: \{\} <br /> |
@@ -180,6 +181,25 @@ _Appears in:_
 | `dns` _string_ |  |  |  |
 
 
+#### PodSchedulingConfig
+
+
+
+PodSchedulingConfig defines pod scheduling configuration for services spawned by LocalStack.
+This allows configuring tolerations, nodeSelector, and affinity for service-specific pods
+(e.g., Lambda, ECS tasks).
+
+
+
+_Appears in:_
+- [LocalStackSpec](#localstackspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `profiles` _object (keys:string, values:[ServiceSchedulingConfig](#serviceschedulingconfig))_ | Scheduling profiles |  | Optional: \{\} <br /> |
+| `services` _object (keys:string, values:[ServiceSchedulingConfig](#serviceschedulingconfig))_ | Service-specific scheduling configuration that overrides defaults.<br />Keys are service names (e.g., "lambda", "ecs", "rds"). |  | Optional: \{\} <br /> |
+
+
 #### PodSpec
 
 
@@ -204,5 +224,28 @@ _Appears in:_
 | `runAsUser` _integer_ |  | 0 | Enum: [0 1000] <br />Optional: \{\} <br /> |
 | `podSecurityContext` _[PodSecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#podsecuritycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
 | `containerSecurityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#securitycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
+
+
+#### ServiceSchedulingConfig
+
+
+
+ServiceSchedulingConfig defines scheduling configuration for pods spawned by LocalStack services
+
+
+
+_Appears in:_
+- [PodSchedulingConfig](#podschedulingconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `tolerations` _[Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#toleration-v1-core) array_ | Tolerations for the pods |  | Optional: \{\} <br /> |
+| `nodeSelector` _object (keys:string, values:string)_ | NodeSelector for the pods |  | Optional: \{\} <br /> |
+| `affinity` _[Affinity](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#affinity-v1-core)_ | Affinity for the pods |  | Optional: \{\} <br /> |
+| `topologySpreadConstraint` _[TopologySpreadConstraint](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#topologyspreadconstraint-v1-core)_ | TopologySpreadConstraint |  | Optional: \{\} <br /> |
+| `priorityClassName` _string_ | Priority class name for workloads |  | Optional: \{\} <br /> |
+| `resources` _[ResourceRequirements](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#resourcerequirements-v1-core)_ | Pod resources |  | Optional: \{\} <br /> |
+| `labels` _object (keys:string, values:string)_ | Custom pod labels |  | Optional: \{\} <br /> |
+| `annotations` _object (keys:string, values:string)_ | Custom pod annotations |  | Optional: \{\} <br /> |
 
 

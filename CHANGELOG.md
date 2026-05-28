@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.7] - 2026-05-28
+
+### Added
+
+* Supports `PodSchedulingConfig` to control where pods are executed
+
+### Fixed
+
+* Fixed license version matching
+
 ## [0.4.6] - 2026-05-19
 
 ### Fixed
@@ -87,6 +97,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.7]: https://github.com/localstack/localstack-operator/compare/v0.4.6..v0.4.7
 [0.4.6]: https://github.com/localstack/localstack-operator/compare/v0.4.5..v0.4.6
 [0.4.5]: https://github.com/localstack/localstack-operator/compare/v0.4.4..v0.4.5
 [0.4.4]: https://github.com/localstack/localstack-operator/compare/v0.4.3..v0.4.4
