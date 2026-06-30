@@ -1713,6 +1713,9 @@ spec:
                                 More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
                               type: object
                           type: object
+                        runtimeClassName:
+                          description: Specific runtime class name to use for scheduling
+                          type: string
                         tolerations:
                           description: Tolerations for the pods
                           items:
@@ -2933,6 +2936,9 @@ spec:
                                 More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
                               type: object
                           type: object
+                        runtimeClassName:
+                          description: Specific runtime class name to use for scheduling
+                          type: string
                         tolerations:
                           description: Tolerations for the pods
                           items:
@@ -3909,7 +3915,7 @@ data:
   LOCALSTACK_LICENSE_SSL_NO_VERIFY: "0"
   LOCALSTACK_TELEMETRY_ENABLED: "1"
   LOCALSTACK_TELEMETRY_ENVIRONMENT: production
-  LOCALSTACK_TELEMETRY_RELEASE: v0.4.8
+  LOCALSTACK_TELEMETRY_RELEASE: v0.4.9
   LOCALSTACK_TELEMETRY_USER_NAME: generic
 kind: ConfigMap
 metadata:
@@ -3974,7 +3980,7 @@ spec:
         envFrom:
         - configMapRef:
             name: localstack-operator-controller-manager-config
-        image: localstack/localstack-k8s-operator:v0.4.8
+        image: localstack/localstack-k8s-operator:v0.4.9
         livenessProbe:
           httpGet:
             path: /healthz

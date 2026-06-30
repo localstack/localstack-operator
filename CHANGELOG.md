@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.9] - 2026-06-30
+
+### Added
+
+* Support for specifying a `runtimeClassName` in the `serviceSchedulingConfig` to control the container runtime for pods spawned by LocalStack
+
 ## [0.4.8] - 2026-06-16
 
 ### Fixed
@@ -105,6 +111,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.9]: https://github.com/localstack/localstack-operator/compare/v0.4.8..v0.4.9
+[0.4.8]: https://github.com/localstack/localstack-operator/compare/v0.4.7..v0.4.8
 [0.4.7]: https://github.com/localstack/localstack-operator/compare/v0.4.6..v0.4.7
 [0.4.6]: https://github.com/localstack/localstack-operator/compare/v0.4.5..v0.4.6
 [0.4.5]: https://github.com/localstack/localstack-operator/compare/v0.4.4..v0.4.5

@@ -247,5 +247,6 @@ _Appears in:_
 | `resources` _[ResourceRequirements](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#resourcerequirements-v1-core)_ | Pod resources |  | Optional: \{\} <br /> |
 | `labels` _object (keys:string, values:string)_ | Custom pod labels |  | Optional: \{\} <br /> |
 | `annotations` _object (keys:string, values:string)_ | Custom pod annotations |  | Optional: \{\} <br /> |
+| `runtimeClassName` _string_ | Specific runtime class name to use for scheduling |  | Optional: \{\} <br /> |
 
 
