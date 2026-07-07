@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.10] - 2026-07-07
+
+### Fixed
+
+* Security updates to fix CVEs (all golang.org/x/net)
+    * CVE-2026-25681
+    * CVE-2026-27136
+    * CVE-2026-42506
+    * CVE-2026-39821
+    * CVE-2026-25680
+    * CVE-2026-42506
+
 ## [0.4.9] - 2026-06-30
 
 ### Added
@@ -111,6 +123,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.10]: https://github.com/localstack/localstack-operator/compare/v0.4.9..v0.4.10
 [0.4.9]: https://github.com/localstack/localstack-operator/compare/v0.4.8..v0.4.9
 [0.4.8]: https://github.com/localstack/localstack-operator/compare/v0.4.7..v0.4.8
 [0.4.7]: https://github.com/localstack/localstack-operator/compare/v0.4.6..v0.4.7
