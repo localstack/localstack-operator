@@ -140,7 +140,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `dnsProvider` _string_ |  |  | Enum: [none coredns] <br />Required: \{\} <br /> |
+| `dnsProvider` _string_ |  |  | Enum: [none coredns eksauto] <br />Required: \{\} <br /> |
 | `dnsConfigName` _string_ |  |  | Required: \{\} <br /> |
 | `dnsConfigNamespace` _string_ |  |  | Required: \{\} <br /> |
 | `debug` _string_ |  | info | Enum: [trace trace-internal debug info warn error warning] <br />Optional: \{\} <br /> |
