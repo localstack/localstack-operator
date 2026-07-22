@@ -143,7 +143,6 @@ spec:
                       procMount denotes the type of proc mount to use for the containers.
                       The default value is Default which uses the container runtime defaults for
                       readonly paths and masked paths.
-                      This requires the ProcMountType feature flag to be enabled.
                       Note that this field cannot be set when spec.os.name is windows.
                     type: string
                   readOnlyRootFilesystem:
@@ -3916,7 +3915,7 @@ data:
   LOCALSTACK_LICENSE_SSL_NO_VERIFY: "0"
   LOCALSTACK_TELEMETRY_ENABLED: "1"
   LOCALSTACK_TELEMETRY_ENVIRONMENT: production
-  LOCALSTACK_TELEMETRY_RELEASE: v0.4.11
+  LOCALSTACK_TELEMETRY_RELEASE: v0.4.12
   LOCALSTACK_TELEMETRY_USER_NAME: generic
 kind: ConfigMap
 metadata:
@@ -3981,7 +3980,7 @@ spec:
         envFrom:
         - configMapRef:
             name: localstack-operator-controller-manager-config
-        image: localstack/localstack-k8s-operator:v0.4.11
+        image: localstack/localstack-k8s-operator:v0.4.12
         livenessProbe:
           httpGet:
             path: /healthz
