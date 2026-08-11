@@ -3715,13 +3715,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - events
-  verbs:
-  - create
-  - patch
-- apiGroups:
-  - ""
-  resources:
   - pods
   - pods/exec
   - pods/log
@@ -3739,8 +3732,11 @@ rules:
   resources:
   - secrets
   verbs:
+  - create
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - ""
@@ -3765,6 +3761,23 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - ""
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  verbs:
+  - get
+  - list
+  - patch
+  - update
 - apiGroups:
   - api.localstack.cloud
   resources:
@@ -3811,6 +3824,17 @@ rules:
   verbs:
   - create
   - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  verbs:
+  - create
   - get
   - list
   - patch
@@ -3915,7 +3939,7 @@ data:
   LOCALSTACK_LICENSE_SSL_NO_VERIFY: "0"
   LOCALSTACK_TELEMETRY_ENABLED: "1"
   LOCALSTACK_TELEMETRY_ENVIRONMENT: production
-  LOCALSTACK_TELEMETRY_RELEASE: v0.4.12
+  LOCALSTACK_TELEMETRY_RELEASE: v0.4.13
   LOCALSTACK_TELEMETRY_USER_NAME: generic
 kind: ConfigMap
 metadata:
@@ -3937,6 +3961,19 @@ spec:
     port: 8443
     protocol: TCP
     targetPort: 8443
+  selector:
+    control-plane: controller-manager
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: localstack-operator-webhook-service
+  namespace: localstack-operator-system
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 9443
   selector:
     control-plane: controller-manager
 ---
@@ -3980,7 +4017,7 @@ spec:
         envFrom:
         - configMapRef:
             name: localstack-operator-controller-manager-config
-        image: localstack/localstack-k8s-operator:v0.4.12
+        image: localstack/localstack-k8s-operator:v0.4.13
         livenessProbe:
           httpGet:
             path: /healthz
@@ -3989,6 +4026,9 @@ spec:
           periodSeconds: 20
         name: manager
         ports:
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
         - containerPort: 8443
           name: https
           protocol: TCP
@@ -4014,3 +4054,33 @@ spec:
         runAsNonRoot: true
       serviceAccountName: localstack-operator-controller-manager
       terminationGracePeriodSeconds: 10
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: localstack-operator-mutating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: localstack-operator-webhook-service
+      namespace: localstack-operator-system
+      path: /mutate-v1-pod-dns
+  failurePolicy: Ignore
+  name: pod-dns.localstack.cloud
+  objectSelector:
+    matchLabels:
+      localstack.cloud/inject-dns: "true"
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    resources:
+    - pods
+    scope: Namespaced
+  sideEffects: None
+  timeoutSeconds: 3

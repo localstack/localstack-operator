@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.13] - 2026-08-11
+
+### Added
+
+* Added optional mutating webhook to transparently reconfigure workload pods to talk to LocalStack as a drop-in replacement for AWS. Optionally, with the ability to use cert-manager for certificates management.
+
 ## [0.4.12] - 2026-07-22
 
 ### Fixed
@@ -138,6 +144,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.13]: https://github.com/localstack/localstack-operator/compare/v0.4.12..v0.4.13
 [0.4.12]: https://github.com/localstack/localstack-operator/compare/v0.4.11..v0.4.12
 [0.4.11]: https://github.com/localstack/localstack-operator/compare/v0.4.10..v0.4.11
 [0.4.10]: https://github.com/localstack/localstack-operator/compare/v0.4.9..v0.4.10
