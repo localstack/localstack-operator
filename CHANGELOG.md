@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.14] - 2026-08-19
+
+### Fixed
+
+* Security updates to fix
+    * CVE-2026-33818
+    * CVE-2026-39821
+    * CVE-2026-46600
+    * CVE-2026-56853
+    * CVE-2026-56858
+    * CVE-2026-56859
+    * CVE-2026-56860
+    * CVE-2026-56862
+
 ## [0.4.13] - 2026-08-11
 
 ### Added
@@ -144,6 +158,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.14]: https://github.com/localstack/localstack-operator/compare/v0.4.13..v0.4.14
 [0.4.13]: https://github.com/localstack/localstack-operator/compare/v0.4.12..v0.4.13
 [0.4.12]: https://github.com/localstack/localstack-operator/compare/v0.4.11..v0.4.12
 [0.4.11]: https://github.com/localstack/localstack-operator/compare/v0.4.10..v0.4.11
