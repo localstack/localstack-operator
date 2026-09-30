@@ -6,9 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [0.4.17] - 2026-09-30
 
-### Changed
+### Fixed
 
-* TODO: describe the changes before merging
+* Security updates to fix
+    * CVE-2026-81870
+    * GHSA-gcjh-h69q-9w9g
 
 ## [0.4.16] - 2026-09-09
 
