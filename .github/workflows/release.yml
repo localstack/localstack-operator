@@ -1,0 +1,66 @@
+name: Release
+
+# Creates the tag and GitHub release for a new controller version once it lands
+# on main. The version comes from the operator image in controller.yaml, the
+# notes from its CHANGELOG.md section.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - controller.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(grep -oE 'localstack/localstack-k8s-operator:v[0-9]+\.[0-9]+\.[0-9]+' controller.yaml | head -1 | cut -d: -f2)
+          if [ -z "$VERSION" ]; then
+            echo "::error::controller.yaml doesn't reference a localstack/localstack-k8s-operator:vX.Y.Z image"
+            exit 1
+          fi
+          if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null; then
+            echo "$VERSION is already released"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      # The section for the new version, up to the next heading or the reference links
+      - name: Extract release notes
+        if: steps.version.outputs.exists == 'false'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          awk -v heading="## [${VERSION#v}]" '
+            in_section && ($0 ~ "^## \\[" || $0 ~ "^\\[[0-9]") { exit }
+            in_section { print; next }
+            index($0, heading) == 1 { in_section = 1 }
+          ' CHANGELOG.md | sed -e '/./,$!d' > notes.md
+          if [ ! -s notes.md ]; then
+            echo "::error::No '## [${VERSION#v}]' section found in CHANGELOG.md"
+            exit 1
+          fi
+
+      - name: Create release
+        if: steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          gh release create "$VERSION" --target "$GITHUB_SHA" --title "$VERSION" \
+            --notes-file notes.md controller.yaml api-docs.md
