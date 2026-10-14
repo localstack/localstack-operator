@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.4.18] - 2026-10-13
+
+### Fixed
+
+* Security updates to fix
+    * CVE-2026-56857
+    * CVE-2026-56866
+    * CVE-2026-78659
+    * CVE-2026-78660
+    * CVE-2026-78663
+    * CVE-2026-78667
+    * CVE-2026-78669
+    * CVE-2026-94439
+    * CVE-2026-94440
+    * CVE-2026-94448
+    * CVE-2026-97030
+    * CVE-2026-97031
+    * CVE-2026-97032
+* Updated dependencies
+    * golang.org/x/net v0.60.0
+    * golang.org/x/sync v0.23.0
+    * golang.org/x/sys v0.48.0
+    * golang.org/x/term v0.46.0
+    * golang.org/x/text v0.42.0
+    * stdlib v1.26.9
+
 ## [0.4.17] - 2026-09-30
 
 ### Fixed
@@ -180,6 +206,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Removed
 
+[0.4.18]: https://github.com/localstack/localstack-operator/compare/v0.4.17..v0.4.18
 [0.4.17]: https://github.com/localstack/localstack-operator/compare/v0.4.16..v0.4.17
 [0.4.16]: https://github.com/localstack/localstack-operator/compare/v0.4.15..v0.4.16
 [0.4.15]: https://github.com/localstack/localstack-operator/compare/v0.4.14..v0.4.15
