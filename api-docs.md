@@ -196,8 +196,8 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `profiles` _object (keys:string, values:[ServiceSchedulingConfig](#serviceschedulingconfig))_ | Scheduling profiles |  | Optional: \{\} <br /> |
-| `services` _object (keys:string, values:[ServiceSchedulingConfig](#serviceschedulingconfig))_ | Service-specific scheduling configuration that overrides defaults.<br />Keys are service names (e.g., "lambda", "ecs", "rds"). |  | Optional: \{\} <br /> |
+| `profiles` _object (keys:string, values:[ServiceSchedulingConfig](#serviceschedulingconfig))_ | Scheduling profiles. The names "default", "defaultAmd64" and "defaultArm64" apply to<br />every service that has no entry under Services. |  | Optional: \{\} <br /> |
+| `services` _object (keys:string, values:[ServiceProfileRef](#serviceprofileref))_ | Profiles to use per service. Keys are service names (e.g., "lambda", "ecs"). |  | Optional: \{\} <br /> |
 
 
 #### PodSpec
@@ -226,6 +226,25 @@ _Appears in:_
 | `containerSecurityContext` _[SecurityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#securitycontext-v1-core)_ |  |  | Optional: \{\} <br /> |
 
 
+#### ServiceProfileRef
+
+
+
+ServiceProfileRef selects which scheduling profiles a service uses.
+It only holds profile names; the settings themselves live in PodSchedulingConfig.Profiles.
+
+
+
+_Appears in:_
+- [PodSchedulingConfig](#podschedulingconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `profile` _string_ | Name of the profile to use for this service, regardless of architecture |  | Optional: \{\} <br /> |
+| `arm64` _string_ | Name of the profile to use for arm64 workloads of this service |  | Optional: \{\} <br /> |
+| `amd64` _string_ | Name of the profile to use for amd64 workloads of this service |  | Optional: \{\} <br /> |
+
+
 #### ServiceSchedulingConfig
 
 
@@ -242,7 +261,7 @@ _Appears in:_
 | `tolerations` _[Toleration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#toleration-v1-core) array_ | Tolerations for the pods |  | Optional: \{\} <br /> |
 | `nodeSelector` _object (keys:string, values:string)_ | NodeSelector for the pods |  | Optional: \{\} <br /> |
 | `affinity` _[Affinity](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#affinity-v1-core)_ | Affinity for the pods |  | Optional: \{\} <br /> |
-| `topologySpreadConstraint` _[TopologySpreadConstraint](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#topologyspreadconstraint-v1-core)_ | TopologySpreadConstraint |  | Optional: \{\} <br /> |
+| `topologySpreadConstraints` _[TopologySpreadConstraint](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#topologyspreadconstraint-v1-core) array_ | TopologySpreadConstraints for the pods |  | Optional: \{\} <br /> |
 | `priorityClassName` _string_ | Priority class name for workloads |  | Optional: \{\} <br /> |
 | `resources` _[ResourceRequirements](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#resourcerequirements-v1-core)_ | Pod resources |  | Optional: \{\} <br /> |
 | `labels` _object (keys:string, values:string)_ | Custom pod labels |  | Optional: \{\} <br /> |
