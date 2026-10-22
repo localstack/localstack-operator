@@ -8,7 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-* TODO: describe the changes before merging
+* **Breaking: this release changes the `LocalStack` CRD. Re-apply `controller.yaml` when upgrading, updating the controller image alone is not enough.** 
+  `spec.podSchedulingConfig` now matches the format LocalStack reads.
+  Entries under `services` only choose profiles (`profile`, `arm64`, `amd64`), settings such as tolerations or resources must live under `profiles`.
+  `topologySpreadConstraint` is renamed to `topologySpreadConstraints` and takes a list.
+  Resources using the old fields were already rejected by LocalStack at startup, after upgrading they are accepted, but the old fields are silently dropped, so move those settings into a profile.
+  If the new controller runs against the old CRD, Kubernetes prunes `services.<name>.profile` as an unknown field and the per-service settings never reach LocalStack.
+
+### Fixed
+
+* Security updates to fix
+    * CVE-2026-111943 (Go standard library, updated to 1.26.10)
+    * DSA-6572-1 (ca-certificates)
 
 ## [0.4.18] - 2026-10-13
 
